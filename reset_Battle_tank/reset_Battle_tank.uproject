@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.20",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "reset_Battle_tank",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
