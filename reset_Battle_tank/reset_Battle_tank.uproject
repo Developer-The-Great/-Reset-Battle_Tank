@@ -7,7 +7,11 @@
 		{
 			"Name": "reset_Battle_tank",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"AIModule"
+			]
 		}
 	]
 }
