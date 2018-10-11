@@ -15,9 +15,14 @@ class RESET_BATTLE_TANK_API ATank_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-		ATank * GetPlayerController() const;
+		ATank * GetControlledTank() const;
 		
-		void BeginPlay() override;
-	
+		virtual void BeginPlay() override;
+
+		virtual void Tick(float DeltaTime) override;
+
+		void AimTowardsCrosshair();
+		
+		bool GetSightRayHitLocation(FVector &HitLocation) const;
 	
 };
