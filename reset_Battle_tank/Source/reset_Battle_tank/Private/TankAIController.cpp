@@ -43,3 +43,25 @@ ATank * ATankAIController::GetPlayerTank() const
 {
 	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	if (!GetPlayerTank())
+	{
+		return;
+
+	}
+
+	AimAt(GetPlayerTank()->GetActorLocation());
+
+}
+
+void ATankAIController::AimAt(FVector HitLocation)
+{
+
+	
+	GetAITank()->AimAt(HitLocation);
+	auto AITankName = GetAITank()->GetName();
+
+	UE_LOG(LogTemp, Warning, TEXT("AI_Tank: %s aiming at %s"), *AITankName, *HitLocation.ToString());
+}

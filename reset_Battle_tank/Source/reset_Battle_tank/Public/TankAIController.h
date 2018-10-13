@@ -17,11 +17,13 @@ class RESET_BATTLE_TANK_API ATankAIController : public AAIController
 
 	ATank* GetAITank() const;
 
-	void BeginPlay() override;
+	virtual void BeginPlay() override;
 
 	ATank* GetPlayerTank() const;
+
+	void Tick(float DeltaTime) override;
 	
-	
+	virtual void AimAt(FVector HitLocation);
 	
 	
 };
