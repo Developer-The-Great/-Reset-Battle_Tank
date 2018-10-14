@@ -19,6 +19,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void Tick(float DeltaTime) override;
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(UStaticMeshComponent * BarrelToSet);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
