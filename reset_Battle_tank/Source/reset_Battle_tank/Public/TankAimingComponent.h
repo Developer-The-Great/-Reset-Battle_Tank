@@ -15,20 +15,20 @@ class RESET_BATTLE_TANK_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	void AimAt(FVector HitLocation);
+	void AimAt(FVector HitLocation,float LaunchSpeed);
 
 	void SetBarrelReference(UStaticMeshComponent *BarrelToSet);
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+private:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UStaticMeshComponent * Barrel = nullptr;
 	
-
+	void MoveBarrelTowards(FVector AimDirection);
 		
 	
 };

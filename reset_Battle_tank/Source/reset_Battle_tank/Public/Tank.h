@@ -32,7 +32,8 @@ protected:
 
 private:	
 	// Called every frame
-	
+	UPROPERTY(EditAnywhere,Category = Firing)
+	float LaunchSpeed = 10000;
 
 	// Called to bind functionality to input
 	

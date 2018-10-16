@@ -41,16 +41,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 void ATank::AimAt(FVector HitLocation) 
 {
-	if(TankAimingComponent)
-	{
-		TankAimingComponent->AimAt(HitLocation);
-		
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("no aiming component!"));
-	
-	}
+		TankAimingComponent->AimAt(HitLocation,LaunchSpeed);
 	
 
 }
