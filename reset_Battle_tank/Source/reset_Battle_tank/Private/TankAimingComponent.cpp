@@ -60,7 +60,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
 	{
 		auto TankName = GetOwner()->GetName();
 		auto AimDirection = TossVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("solution %s"),*AimDirection.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("solution AIM DIRECTION:%s"),*AimDirection.ToString());
 		MoveBarrelTowards(AimDirection);
 	}
 	else 
