@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
+#include "TankTurret.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/Actor.h"
@@ -44,34 +46,50 @@ void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
 	
 	FVector TossVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	bool bAimSolutionFound = UGameplayStatics::SuggestProjectileVelocity(this, TossVelocity, StartLocation, HitLocation, LaunchSpeed, false, 0.0f, 0.0f, ESuggestProjVelocityTraceOption::DoNotTrace);
+	bool bAimSolutionFound = UGameplayStatics::SuggestProjectileVelocity(
+		this, 
+		TossVelocity, 
+		StartLocation, 
+		HitLocation, 
+		LaunchSpeed, 
+		false, 
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace);
 	if (bAimSolutionFound)
 	{
 		auto TankName = GetOwner()->GetName();
 		auto AimDirection = TossVelocity.GetSafeNormal();
-		//UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *TankName, *AimDirection.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("solution %s"),*AimDirection.ToString());
 		MoveBarrelTowards(AimDirection);
-		
+	}
+	else 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("no solution"));
 	
 	}
-	
-	
 
-	
-	
-		
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent *BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel *BarrelToSet)
 {
 	Barrel = BarrelToSet;
+}
+void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
+{
+	Turret = TurretToSet;
 }
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	auto CurrentRotation = Barrel->GetForwardVector().Rotation();
 	auto NeededRotation = AimDirection.Rotation();
 	auto DeltaRotation = NeededRotation - CurrentRotation;
-	UE_LOG(LogTemp,Warning,TEXT("need rotation: %s"),*DeltaRotation.ToString())
+	float Yaw = DeltaRotation.Yaw;
+	FString YawString = FString::SanitizeFloat(Yaw);
+	//UE_LOG(LogTemp, Warning, TEXT("need yaw: %s"), *YawString)
+
+	Barrel->Elevate(DeltaRotation.Pitch);
+	//Turret->Elevate(DeltaRotation.Yaw);
 
 }
 
