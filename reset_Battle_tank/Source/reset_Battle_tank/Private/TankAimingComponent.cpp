@@ -86,10 +86,10 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto DeltaRotation = NeededRotation - CurrentRotation;
 	float Yaw = DeltaRotation.Yaw;
 	FString YawString = FString::SanitizeFloat(Yaw);
-	//UE_LOG(LogTemp, Warning, TEXT("need yaw: %s"), *YawString)
+	UE_LOG(LogTemp, Warning, TEXT("%s need yaw: %s"), *GetOwner()->GetName(),*YawString)
 
 	Barrel->Elevate(DeltaRotation.Pitch);
-	//Turret->Elevate(DeltaRotation.Yaw);
+	Turret->Rotate(DeltaRotation.Yaw);
 
 }
 

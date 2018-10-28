@@ -17,12 +17,12 @@ class RESET_BATTLE_TANK_API UTankTurret : public UStaticMeshComponent
 	
 	public:
 
-	void Elevate(float RelativeSpeed);
+	void Rotate(float RelativeSpeed);
 
 	private:
 
 	UPROPERTY(EditAnyWhere, Category = Setup)
-	float MaxDegreesPerSecond = 10;
+	float MaxDegreesPerSecond = 20;
 		
 		
 
