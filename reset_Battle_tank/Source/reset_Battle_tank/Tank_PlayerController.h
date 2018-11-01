@@ -3,13 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Tank.h"
+
 #include "GameFramework/PlayerController.h"
 #include "Tank_PlayerController.generated.h"
 
 /**
  * 
  */
+class ATank;
 UCLASS()
 class RESET_BATTLE_TANK_API ATank_PlayerController : public APlayerController
 {

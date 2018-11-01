@@ -12,7 +12,7 @@ void UTankTurret::Rotate(float RelativeSpeed)
 
 	auto NewRotation = RelativeRotation.Yaw + RotationChange;
 	
-	SetRelativeRotation(FRotator(RelativeRotation.Pitch, NewRotation, RelativeRotation.Roll));
+	SetRelativeRotation(FRotator(0, NewRotation,0));
 
 }
 

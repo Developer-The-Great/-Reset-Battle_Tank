@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "TankAimingComponent.h"
+
 #include "Tank.generated.h"
 class UTankBarrel;
 class UTankTurret;
+class UTankAimingComponent;
+class AProjectile;
 UCLASS()
 class RESET_BATTLE_TANK_API ATank : public APawn
 {
@@ -25,6 +27,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret * TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -42,6 +47,11 @@ private:
 	// Called to bind functionality to input
 	
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile>  ProjectileBlueprint;
 	
 	
+	UTankBarrel * Barrel = nullptr;
+
+
 };

@@ -60,12 +60,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
 	{
 		auto TankName = GetOwner()->GetName();
 		auto AimDirection = TossVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("solution AIM DIRECTION:%s"),*AimDirection.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("solution AIM DIRECTION:%s"),*AimDirection.ToString());
 		MoveBarrelTowards(AimDirection);
 	}
 	else 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("no solution"));
+		//UE_LOG(LogTemp, Warning, TEXT("no solution"));
 	
 	}
 
@@ -84,10 +84,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto CurrentRotation = Barrel->GetForwardVector().Rotation();
 	auto NeededRotation = AimDirection.Rotation();
 	auto DeltaRotation = NeededRotation - CurrentRotation;
-	float Yaw = DeltaRotation.Yaw;
-	FString YawString = FString::SanitizeFloat(Yaw);
-	UE_LOG(LogTemp, Warning, TEXT("%s need yaw: %s"), *GetOwner()->GetName(),*YawString)
-
+	
 	Barrel->Elevate(DeltaRotation.Pitch);
 	Turret->Rotate(DeltaRotation.Yaw);
 
