@@ -21,10 +21,9 @@ class RESET_BATTLE_TANK_API UTankTurret : public UStaticMeshComponent
 
 	private:
 
-	UPROPERTY(EditAnyWhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float MaxDegreesPerSecond = 20;
-		
-		
+
 
 	
 };

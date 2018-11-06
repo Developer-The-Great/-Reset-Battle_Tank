@@ -9,6 +9,7 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
+class UTankMovementComponent;
 class AProjectile;
 UCLASS()
 class RESET_BATTLE_TANK_API ATank : public APawn
@@ -35,19 +36,20 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent * TankAimingComponent = nullptr;
-	
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent * TankMovementComponent = nullptr;
 
 
 
 private:	
 	// Called every frame
-	UPROPERTY(EditAnywhere,Category = Firing)
+	UPROPERTY(EditDefaultsOnly,Category = Firing)
 	float LaunchSpeed = 10000;
 
 	// Called to bind functionality to input
 	
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile>  ProjectileBlueprint;
 	
 	

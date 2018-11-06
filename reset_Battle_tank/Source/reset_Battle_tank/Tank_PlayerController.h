@@ -30,9 +30,9 @@ class RESET_BATTLE_TANK_API ATank_PlayerController : public APlayerController
 
 		bool GetLookVectorHitLocation(FVector &HitLocation, FVector CamWorldDirection) const;
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairYLocation = 0.3333;
 
 	float LineTraceRange = 100000;

@@ -18,11 +18,11 @@ class RESET_BATTLE_TANK_API UTankBarrel : public UStaticMeshComponent
 	void Elevate(float RelativeSpeed);
 	
 	private:
-	UPROPERTY(EditAnyWhere,Category = Setup)
+	UPROPERTY(EditDefaultsOnly,Category = Setup)
 	float MaxDegreesPerSecond = 5;
-	UPROPERTY(EditAnyWhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float MaxElevation = 35;
-	UPROPERTY(EditAnyWhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float MinElevation = 0;
 	
 };
