@@ -16,7 +16,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 	
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("MovementComponent"));
+
 	
 }
 
@@ -43,7 +43,7 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Firing"));
+	//UE_LOG(LogTemp, Warning, TEXT("Firing"));
 	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime > ReloadTimeSeconds);
 	if (Barrel && IsReloaded)
 	{
