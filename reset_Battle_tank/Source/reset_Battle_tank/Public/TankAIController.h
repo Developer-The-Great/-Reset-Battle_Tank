@@ -24,6 +24,7 @@ class RESET_BATTLE_TANK_API ATankAIController : public AAIController
 	void Tick(float DeltaTime) override;
 	
 	virtual void AimAt(FVector HitLocation);
-	
+private:
+	float AcceptanceRadius = 1000;
 	
 };

@@ -23,6 +23,8 @@ public:
 	void SetBarrelReference(UTankBarrel *BarrelToSet);
 
 	void SetTurretReference(UTankTurret *TurretToSet);
+
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -35,6 +37,6 @@ private:
 	UTankTurret * Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
-		
+	
 	
 };

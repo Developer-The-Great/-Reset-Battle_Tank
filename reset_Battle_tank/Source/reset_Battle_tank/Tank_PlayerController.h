@@ -16,19 +16,19 @@ class RESET_BATTLE_TANK_API ATank_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-		ATank * GetControlledTank() const;
+	ATank * GetControlledTank() const;
 		
-		virtual void BeginPlay() override;
+	virtual void BeginPlay() override;
 
-		virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float DeltaTime) override;
 
-		void AimTowardsCrosshair();
+	void AimTowardsCrosshair();
 		
-		bool GetSightRayHitLocation(FVector &HitLocation) const;
+	bool GetSightRayHitLocation(FVector &HitLocation) const;
 
-		bool GetLookDirection(FVector2D ScreenLoc, FVector &CamWorldDirection) const;
+	bool GetLookDirection(FVector2D ScreenLoc, FVector &CamWorldDirection) const;
 
-		bool GetLookVectorHitLocation(FVector &HitLocation, FVector CamWorldDirection) const;
+	bool GetLookVectorHitLocation(FVector &HitLocation, FVector CamWorldDirection) const;
 private:
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5;
@@ -36,5 +36,7 @@ private:
 	float CrossHairYLocation = 0.3333;
 
 	float LineTraceRange = 100000;
+	
+	
 	
 };
