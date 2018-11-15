@@ -15,7 +15,7 @@ UCLASS()
 class RESET_BATTLE_TANK_API ATank_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
-
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank * GetControlledTank() const;
 		
 	virtual void BeginPlay() override;

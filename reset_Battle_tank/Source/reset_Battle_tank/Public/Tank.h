@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 
 #include "Tank.generated.h"
+
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
@@ -34,7 +35,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent * TankAimingComponent = nullptr;
 	UPROPERTY(BlueprintReadOnly)
 	UTankMovementComponent * TankMovementComponent = nullptr;
@@ -42,6 +43,7 @@ protected:
 
 
 private:	
+	
 	// Called every frame
 	UPROPERTY(EditDefaultsOnly,Category = Firing)
 	float LaunchSpeed = 10000;
