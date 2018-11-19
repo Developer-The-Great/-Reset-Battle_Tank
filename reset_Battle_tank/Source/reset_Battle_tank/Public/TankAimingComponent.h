@@ -26,10 +26,12 @@ public:
 	UTankAimingComponent();
 	void AimAt(FVector HitLocation,float LaunchSpeed);
 
-	void SetBarrelReference(UTankBarrel *BarrelToSet);
+	/*void SetBarrelReference(UTankBarrel *BarrelToSet);
 
-	void SetTurretReference(UTankTurret *TurretToSet);
+	void SetTurretReference(UTankTurret *TurretToSet);*/
 
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void Initialize(UTankBarrel *BarrelToSet, UTankTurret* TurretToSet);
 
 protected:
 	// Called when the game starts
