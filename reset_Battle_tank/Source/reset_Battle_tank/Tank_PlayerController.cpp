@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank_PlayerController.h"
+#include "TankAimingComponent.h"
 #include "Tank.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
@@ -25,7 +26,8 @@ void ATank_PlayerController::BeginPlay()
 	
 	}
 	
-	
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	FoundAimingComponent(AimingComponent);
 }
 
 void ATank_PlayerController::Tick(float DeltaTime)
