@@ -16,13 +16,15 @@ void ATank_PlayerController::BeginPlay()
 	
 	Super::BeginPlay();
 	auto PlayerController = GetControlledTank();
-	if (PlayerController) 
+	if (!ensure(PlayerController)) 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Possesing %s"),*PlayerController->GetName());
+		UE_LOG(LogTemp, Warning, TEXT("Tank Not Found!"));
+		
 	}
 	else 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank Not Found!"));
+		UE_LOG(LogTemp, Warning, TEXT("Player Possesing %s"), *PlayerController->GetName());
+		
 	
 	}
 	

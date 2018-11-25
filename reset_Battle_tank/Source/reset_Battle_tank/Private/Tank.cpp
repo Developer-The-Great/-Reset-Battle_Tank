@@ -43,10 +43,11 @@ void ATank::BeginPlay()
 //}
 
 void ATank::Fire()
-{
+{	
+	if (!ensure(Barrel)) { return; }
 	//UE_LOG(LogTemp, Warning, TEXT("Firing"));
 	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime > ReloadTimeSeconds);
-	if (Barrel && IsReloaded)
+	if (IsReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("Projectile")));
 
@@ -67,7 +68,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 void ATank::AimAt(FVector HitLocation) 
 {	
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation,LaunchSpeed);
 	
 

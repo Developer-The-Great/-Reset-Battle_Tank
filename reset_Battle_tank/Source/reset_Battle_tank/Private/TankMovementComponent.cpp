@@ -5,10 +5,10 @@
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	if (!LeftTrack || !RightTrack)
+	/*if (!ensure(LeftTrack && RightTrack))
 	{
 		return;
-	}
+	}*/
 	//UE_LOG(LogTemp,Warning,TEXT("Triggered F/B"))
 	LeftTrack->SetTankThrottle(Throw);
 	RightTrack->SetTankThrottle(Throw);
@@ -17,10 +17,10 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 
 void UTankMovementComponent::IntendTurn(float Throw)
 {
-	if (!LeftTrack || !RightTrack)
+	/*if (!ensure(LeftTrack && RightTrack))
 	{
 		return;
-	}
+	}*/
 	
 	if (Throw > 0) 
 	{
@@ -39,7 +39,7 @@ void UTankMovementComponent::IntendTurn(float Throw)
 
 void UTankMovementComponent::Initialize(UTankTrack * LeftTrackToSet, UTankTrack * RightTrackToSet)
 {
-	if(!LeftTrackToSet && !RightTrackToSet)
+	if(!ensure(LeftTrackToSet && RightTrackToSet))
 	{
 		return;
 	}
