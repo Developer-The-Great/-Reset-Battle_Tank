@@ -42,6 +42,10 @@ private:
 
 	float LineTraceRange = 100000;
 	
+	UTankAimingComponent * TankAimingComponent = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float LaunchSpeed = 10000;
 	
 	
 };

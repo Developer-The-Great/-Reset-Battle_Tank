@@ -48,10 +48,15 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
 {
-	if (!ensure(Barrel)) { return; }
+	if (!ensure(Barrel)) { 
+		UE_LOG(LogTemp, Warning, TEXT("aim at no tick!"));
+		return; 
+		
+	}
 	
 	FVector TossVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+	
 	bool bAimSolutionFound = UGameplayStatics::SuggestProjectileVelocity(
 		this, 
 		TossVelocity, 
@@ -77,17 +82,13 @@ void UTankAimingComponent::AimAt(FVector HitLocation,float LaunchSpeed)
 
 }
 
-//void UTankAimingComponent::SetBarrelReference(UTankBarrel *BarrelToSet)
-//{
-//	Barrel = BarrelToSet;
-//}
-//void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
-//{
-//	Turret = TurretToSet;
-//}
+
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	if (ensure(Barrel && Turret)) { return; }
+	if (!ensure(Barrel && Turret)) 
+	{	
+		return; 
+	}
 	auto CurrentRotation = Barrel->GetForwardVector().Rotation();
 	auto NeededRotation = AimDirection.Rotation();
 	auto DeltaRotation = NeededRotation - CurrentRotation;

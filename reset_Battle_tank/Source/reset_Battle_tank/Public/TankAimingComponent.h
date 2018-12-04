@@ -34,6 +34,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void Initialize(UTankBarrel *BarrelToSet, UTankTurret* TurretToSet);
 
+
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

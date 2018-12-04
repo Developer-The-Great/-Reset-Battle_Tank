@@ -28,8 +28,8 @@ void ATank_PlayerController::BeginPlay()
 	
 	}
 	
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	FoundAimingComponent(AimingComponent);
+	TankAimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	FoundAimingComponent(TankAimingComponent);
 }
 
 void ATank_PlayerController::Tick(float DeltaTime)
@@ -45,7 +45,7 @@ void ATank_PlayerController::AimTowardsCrosshair()
 	if (GetSightRayHitLocation(HitLocation)) 
 	{
 		//UE_LOG(LogTemp, Warning, TEXT("Aiming! End: %s"), *HitLocation.ToString());
-		GetControlledTank()->AimAt(HitLocation);
+		TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 	}
 	
 

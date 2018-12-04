@@ -6,7 +6,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
+
 
 
 // Sets default values
@@ -25,22 +25,11 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Warning, TEXT("DONKEY: %s BeginPLay cpp"), *GetName());
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 	
 }
 
 
-
-
-//void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
-//{
-//	TankAimingComponent->SetBarrelReference(BarrelToSet);
-//	Barrel = BarrelToSet;
-//}
-//
-//void ATank::SetTurretReference(UTankTurret * TurretToSet)
-//{
-//	TankAimingComponent->SetTurretReference(TurretToSet);
-//}
 
 void ATank::Fire()
 {	
@@ -51,7 +40,7 @@ void ATank::Fire()
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("Projectile")));
 
-		Projectile->LaunchProjectile(LaunchSpeed);
+		//Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 	}
 
@@ -68,8 +57,13 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 void ATank::AimAt(FVector HitLocation) 
 {	
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation,LaunchSpeed);
+	if (!ensure(TankAimingComponent)) 
+	{ 
+		UE_LOG(LogTemp, Warning, TEXT("aiming not triggered at tank"));
+		return; 
+	}
+	//UE_LOG(LogTemp, Warning, TEXT("aiming triggered at tank"));
+	//TankAimingComponent->AimAt(HitLocation,LaunchSpeed);
 	
 
 }
