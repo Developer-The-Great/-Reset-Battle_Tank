@@ -25,7 +25,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Warning, TEXT("DONKEY: %s BeginPLay cpp"), *GetName());
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+	
 	
 }
 
@@ -55,16 +55,5 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
-void ATank::AimAt(FVector HitLocation) 
-{	
-	if (!ensure(TankAimingComponent)) 
-	{ 
-		UE_LOG(LogTemp, Warning, TEXT("aiming not triggered at tank"));
-		return; 
-	}
-	//UE_LOG(LogTemp, Warning, TEXT("aiming triggered at tank"));
-	//TankAimingComponent->AimAt(HitLocation,LaunchSpeed);
-	
 
-}
 

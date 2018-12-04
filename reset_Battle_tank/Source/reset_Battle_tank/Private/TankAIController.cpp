@@ -1,36 +1,37 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAIController.h"
+#include "TankAimingComponent.h"
 #include "Engine/World.h"
-#include "Tank.h"
+
 #include "../Public/TankAIController.h"
 
-ATank * ATankAIController::GetAITank() const
-{
-	return Cast<ATank>(GetPawn());
-}
+
 void ATankAIController::BeginPlay() 
 {
 	Super::BeginPlay();
 	
-
+	TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 }
 
-ATank * ATankAIController::GetPlayerTank() const
-{
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-}
 
 void ATankAIController::Tick(float DeltaTime)
 {
 
-	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	auto AITank = Cast<ATank>(GetPawn());
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto AITank =GetPawn();
+
+	auto TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(TankAimingComponent)) 
+	{
+		return;
+	
+	}
 
 	if (PlayerTank)
 	{
 		MoveToActor(PlayerTank, AcceptanceRadius);
-		AITank->AimAt(PlayerTank->GetActorLocation());
+		TankAimingComponent->AimAt(PlayerTank->GetActorLocation());
 		//AITank->Fire();
 	}
 
@@ -38,12 +39,12 @@ void ATankAIController::Tick(float DeltaTime)
 
 }
 
-void ATankAIController::AimAt(FVector HitLocation)
-{
-
-	
-	GetAITank()->AimAt(HitLocation);
-	auto AITankName = GetAITank()->GetName();
-
-	
-}
+//void ATankAIController::AimAt(FVector HitLocation)
+//{
+//
+//	
+//	GetAITank()->AimAt(HitLocation);
+//	auto AITankName = GetAITank()->GetName();
+//
+//	
+//}

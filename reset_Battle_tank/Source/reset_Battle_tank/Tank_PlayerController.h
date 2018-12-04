@@ -10,15 +10,14 @@
 /**
  * 
  */
-class ATank;
+
 class UTankAimingComponent;
 UCLASS()
 class RESET_BATTLE_TANK_API ATank_PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank * GetControlledTank() const;
+
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent *AimingRef);
@@ -44,8 +43,7 @@ private:
 	
 	UTankAimingComponent * TankAimingComponent = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-		float LaunchSpeed = 10000;
+	
 	
 	
 };

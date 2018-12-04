@@ -25,7 +25,7 @@ class RESET_BATTLE_TANK_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	void AimAt(FVector HitLocation,float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 
 	/*void SetBarrelReference(UTankBarrel *BarrelToSet);
 
@@ -52,6 +52,9 @@ private:
 	UTankTurret * Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float LaunchSpeed = 10000;
 	
 	
 };

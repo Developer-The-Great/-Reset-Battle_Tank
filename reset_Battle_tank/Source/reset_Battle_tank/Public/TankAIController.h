@@ -10,22 +10,25 @@
 /**
  * 
  */
-class ATank;
+
+class UTankAimingComponent;
 UCLASS()
 class RESET_BATTLE_TANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 
-	ATank* GetAITank() const;
 
 	virtual void BeginPlay() override;
 
-	ATank* GetPlayerTank() const;
+
 
 	void Tick(float DeltaTime) override;
 	
-	virtual void AimAt(FVector HitLocation);
+
 private:
 	float AcceptanceRadius = 1000;
 	
+	UTankAimingComponent * TankAimingComponent = nullptr;
+
+
 };
