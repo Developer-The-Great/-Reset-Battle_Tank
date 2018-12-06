@@ -2,9 +2,8 @@
 
 #include "Tank.h"
 #include "TankBarrel.h"
-#include "Projectile.h"
-#include "GameFramework/ProjectileMovementComponent.h"
-#include "Engine/World.h"
+
+
 #include "TankAimingComponent.h"
 
 
@@ -31,23 +30,7 @@ void ATank::BeginPlay()
 
 
 
-void ATank::Fire()
-{	
-	if (!ensure(Barrel)) { return; }
-	//UE_LOG(LogTemp, Warning, TEXT("Firing"));
-	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime > ReloadTimeSeconds);
-	if (IsReloaded)
-	{
-		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("Projectile")));
 
-		//Projectile->LaunchProjectile(LaunchSpeed);
-		LastFireTime = FPlatformTime::Seconds();
-	}
-
-	
-	
-
-}
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

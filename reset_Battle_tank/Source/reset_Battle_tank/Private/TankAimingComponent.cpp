@@ -7,6 +7,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "../Public/TankAimingComponent.h"
+#include "Engine/World.h"
+#include "Projectile.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 
 // Sets default values for this component's properties
@@ -34,8 +37,19 @@ void UTankAimingComponent::BeginPlay()
 	// ...
 	
 }
-
-
+void UTankAimingComponent::Fire()
+{
+	if (!ensure(Barrel)) { return; }
+	//UE_LOG(LogTemp, Warning, TEXT("Firing"));
+	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime > ReloadTimeSeconds);
+	if (IsReloaded)
+	{
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("Projectile")));
+		
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+}
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {

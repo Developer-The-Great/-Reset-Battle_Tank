@@ -15,6 +15,7 @@ enum class EFiringStatus : uint8
 };
 class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 
@@ -34,7 +35,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void Initialize(UTankBarrel *BarrelToSet, UTankTurret* TurretToSet);
 
-
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 
 protected:
 	// Called when the game starts
@@ -42,6 +44,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Realoading;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	TSubclassOf<AProjectile>  ProjectileBlueprint;
 
 private:	
 	
@@ -54,7 +59,12 @@ private:
 	void MoveBarrelTowards(FVector AimDirection);
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
-		float LaunchSpeed = 10000;
+	float LaunchSpeed = 10000;
 	
+	double LastFireTime = 0;
+	float ReloadTimeSeconds = 3;
+
+	
+
 	
 };

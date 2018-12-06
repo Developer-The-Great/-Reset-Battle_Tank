@@ -24,12 +24,12 @@ void UTankMovementComponent::IntendTurn(float Throw)
 	
 	if (Throw > 0) 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("right"))
+		//UE_LOG(LogTemp, Warning, TEXT("right"))
 		
 	}
 	else if (Throw < 0) 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("left"))
+		//UE_LOG(LogTemp, Warning, TEXT("left"))
 	
 	}
 	LeftTrack->SetTankThrottle(-Throw);
@@ -60,7 +60,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, boo
 	IntendMoveForward(ThrowRequired);
 
 	FVector TurnThrow = FVector::CrossProduct(IntendedDirection,TankDirection);
-	UE_LOG(LogTemp, Warning, TEXT("DotProduct: %f, CrossProduct: %f"), ThrowRequired,TurnThrow.Z)
+	//UE_LOG(LogTemp, Warning, TEXT("DotProduct: %f, CrossProduct: %f"), ThrowRequired,TurnThrow.Z)
 	IntendTurn(TurnThrow.Z);
 }
 
