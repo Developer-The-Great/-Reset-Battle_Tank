@@ -33,27 +33,58 @@ void UTankAimingComponent::Initialize(UTankBarrel * BarrelToSet, UTankTurret * T
 void UTankAimingComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+	LastFireTime = FPlatformTime::Seconds();
+	
 	// ...
 	
 }
 void UTankAimingComponent::Fire()
 {
 	if (!ensure(Barrel)) { return; }
-	//UE_LOG(LogTemp, Warning, TEXT("Firing"));
-	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime > ReloadTimeSeconds);
-	if (IsReloaded)
+	else if (!ensure(ProjectileBlueprint)) { return; }
+	
+	
+	if(FiringStatus != EFiringStatus::Realoading)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("Projectile")));
-		
+
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
+	
 	}
+	
+	//bool bIsBarrelMoving = FVector::Equals(CurrentBarrelRot, AimDirection,0.01f);
+	
+
+	
 }
+
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	
+
+	auto CurrentBarrelRot = Barrel->GetForwardVector();
+	//reloading
+	if (FPlatformTime::Seconds() - LastFireTime < ReloadTimeSeconds)
+	{
+		FiringStatus = EFiringStatus::Realoading;
+		UE_LOG(LogTemp, Warning, TEXT("RELOADING"));
+	}
+	//Aiming
+	else if (!CurrentBarrelRot.Equals(AimDirection,0.02))
+	{
+		FiringStatus = EFiringStatus::Aiming;
+		UE_LOG(LogTemp, Warning, TEXT("Aiming"));
+	}
+	else 
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Locked"));
+		FiringStatus = EFiringStatus::Locked;
+	
+	}
 
 	// ...
 }
@@ -84,7 +115,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	if (bAimSolutionFound)
 	{
 		auto TankName = GetOwner()->GetName();
-		auto AimDirection = TossVelocity.GetSafeNormal();
+		AimDirection = TossVelocity.GetSafeNormal();
+		//AimDirection = &Direction;
 		//UE_LOG(LogTemp, Warning, TEXT("solution AIM DIRECTION:%s"),*AimDirection.ToString());
 		MoveBarrelTowards(AimDirection);
 	}
@@ -95,6 +127,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	}
 
 }
+
+
 
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)

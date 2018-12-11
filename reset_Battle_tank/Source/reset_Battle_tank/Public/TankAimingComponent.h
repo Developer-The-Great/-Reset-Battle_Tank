@@ -51,7 +51,8 @@ protected:
 private:	
 	
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
 
 	UTankBarrel * Barrel = nullptr;
 	UTankTurret * Turret = nullptr;
@@ -64,7 +65,8 @@ private:
 	double LastFireTime = 0;
 	float ReloadTimeSeconds = 3;
 
-	
+	//FVector* AimDirection = nullptr;
+	FVector AimDirection;
 
 	
 };
