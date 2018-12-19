@@ -13,7 +13,7 @@ UTankTrack::UTankTrack()
 void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
 {
 	
-	UE_LOG(LogTemp, Warning, TEXT("HIT"));
+	//UE_LOG(LogTemp, Warning, TEXT("HIT"));
 	
 	DriveTrack();
 	ApplySidewaysForce();
@@ -48,7 +48,7 @@ void UTankTrack::ApplySidewaysForce()
 
 void UTankTrack::SetTankThrottle(float Throttle)
 {
-	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
+	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1.5f, 1.5f);
 	
 
 }

@@ -26,7 +26,8 @@ class RESET_BATTLE_TANK_API ATankAIController : public AAIController
 	
 
 private:
-	float AcceptanceRadius = 1000;
+	UPROPERTY(EditDefaultsOnly)
+	float AcceptanceRadius = 20000;
 	
 	UTankAimingComponent * TankAimingComponent = nullptr;
 

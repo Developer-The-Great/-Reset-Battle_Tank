@@ -55,7 +55,7 @@ bool ATank_PlayerController::GetSightRayHitLocation(FVector & HitLocation) const
 		return bLookDirection;
 	}
 	
-	return true;
+	return false;
 }
 
 bool ATank_PlayerController::GetLookDirection(FVector2D ScreenLoc, FVector & CamWorldDirection) const
