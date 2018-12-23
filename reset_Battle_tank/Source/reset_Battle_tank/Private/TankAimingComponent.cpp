@@ -44,13 +44,14 @@ void UTankAimingComponent::Fire()
 	else if (!ensure(ProjectileBlueprint)) { return; }
 	
 	
-	if(FiringStatus != EFiringStatus::Realoading)
+	
+	if(FiringStatus == EFiringStatus::Aiming || FiringStatus == EFiringStatus::Locked)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("Projectile")));
-
+		Amno--;
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
-	
+		UE_LOG(LogTemp, Warning, TEXT("FIRE"));
 	}
 	
 	//bool bIsBarrelMoving = FVector::Equals(CurrentBarrelRot, AimDirection,0.01f);
@@ -64,29 +65,40 @@ EFiringStatus UTankAimingComponent::GetFiringState() const
 	return FiringStatus;
 }
 
+int32 UTankAimingComponent::GetAmno() const
+{
+	return Amno;
+}
+
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	//UE_LOG(LogTemp, Warning, TEXT("Amno: %i"), Amno);
 	
 
 	auto CurrentBarrelRot = Barrel->GetForwardVector();
 	//reloading
-	if (FPlatformTime::Seconds() - LastFireTime < ReloadTimeSeconds)
+	if(Amno <= 0)
+	{
+		FiringStatus = EFiringStatus::OutOfAmno;
+
+	
+	}
+	else if (FPlatformTime::Seconds() - LastFireTime < ReloadTimeSeconds)
 	{
 		FiringStatus = EFiringStatus::Realoading;
-		UE_LOG(LogTemp, Warning, TEXT("RELOADING"));
+		//UE_LOG(LogTemp, Warning, TEXT("RELOADING"));
 	}
 	//Aiming
 	else if (!CurrentBarrelRot.Equals(AimDirection,0.02))
 	{
 		FiringStatus = EFiringStatus::Aiming;
-		UE_LOG(LogTemp, Warning, TEXT("Aiming"));
+		//UE_LOG(LogTemp, Warning, TEXT("Aiming"));
 	}
 	else 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Locked"));
+		//UE_LOG(LogTemp, Warning, TEXT("Locked"));
 		FiringStatus = EFiringStatus::Locked;
 	
 	}

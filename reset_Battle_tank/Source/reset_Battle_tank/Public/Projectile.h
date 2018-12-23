@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GameFramework/ProjectileMovementComponent.h"
+
+
 #include "Projectile.generated.h"
 
-
+class UProjectileMovementComponent;
+class UParticleSystemComponent;
 UCLASS()
 class RESET_BATTLE_TANK_API AProjectile : public AActor
 {
@@ -24,10 +26,16 @@ protected:
 
 	
 
-public:	
+private:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UProjectileMovementComponent * Projectile;
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* CollisionMesh = nullptr;
+	UPROPERTY(VisibleAnywhere)
+		UParticleSystemComponent *LaunchBlast = nullptr;
+
 	
 	
 };

@@ -11,7 +11,8 @@ enum class EFiringStatus : uint8
 {
 	Locked,
 	Aiming,
-	Realoading
+	Realoading,
+	OutOfAmno
 };
 class UTankBarrel;
 class UTankTurret;
@@ -38,17 +39,26 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
 	EFiringStatus GetFiringState() const;
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	int32 GetAmno() const;
+
+	
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Realoading;
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile>  ProjectileBlueprint;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Amno")
+	int32 Amno = 5;
 
 private:	
 	
@@ -65,6 +75,8 @@ private:
 	float LaunchSpeed = 10000;
 	
 	double LastFireTime = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float ReloadTimeSeconds = 3;
 
 	//FVector* AimDirection = nullptr;
