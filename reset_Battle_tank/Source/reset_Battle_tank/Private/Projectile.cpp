@@ -4,6 +4,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -27,7 +28,9 @@ AProjectile::AProjectile()
 	Projectile->bAutoActivate = false;
 	ImpactBlast->bAutoActivate = false;
 
-
+	RadialForce = CreateDefaultSubobject<URadialForceComponent>(FName("RadialForce"));
+	RadialForce->bAutoActivate = false;
+	RadialForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 void AProjectile::LaunchProjectile(float LaunchSpeed)
@@ -48,7 +51,8 @@ void AProjectile::OnHit( AActor* SelfActor, AActor* OtherActor, FVector NormalIm
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	UE_LOG(LogTemp, Warning, TEXT("HIT"));
-
+	RadialForce->FireImpulse();
+	RadialForce->Deactivate();
 }
 
 // Called every frame

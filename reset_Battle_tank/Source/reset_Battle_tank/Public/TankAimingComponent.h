@@ -57,7 +57,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile>  ProjectileBlueprint;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Amno")
+	UPROPERTY(EditDefaultsOnly, Category = "Amno")
 	int32 Amno = 5;
 
 private:	

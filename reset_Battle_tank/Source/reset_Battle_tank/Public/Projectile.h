@@ -10,6 +10,7 @@
 
 class UProjectileMovementComponent;
 class UParticleSystemComponent;
+class URadialForceComponent;
 UCLASS()
 class RESET_BATTLE_TANK_API AProjectile : public AActor
 {
@@ -40,5 +41,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UParticleSystemComponent *ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere)
+	URadialForceComponent* RadialForce = nullptr;
 	
 };
