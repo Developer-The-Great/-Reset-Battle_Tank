@@ -5,6 +5,9 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Engine/World.h"
+#include "TimerManager.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -52,9 +55,32 @@ void AProjectile::OnHit( AActor* SelfActor, AActor* OtherActor, FVector NormalIm
 	ImpactBlast->Activate();
 	UE_LOG(LogTemp, Warning, TEXT("HIT"));
 	RadialForce->FireImpulse();
-	RadialForce->Deactivate();
-}
+	//RadialForce->Deactivate();
 
+	SetRootComponent(ImpactBlast);
+	CollisionMesh->DestroyComponent();
+
+	UGameplayStatics::ApplyRadialDamage
+	(
+		this,
+		ProjectileDamage,
+		GetActorLocation(),
+		RadialForce->Radius,
+		UDamageType::StaticClass(),
+		TArray<AActor*>()
+	);
+	//GetWorld()->GetTimerManager().SetTimer()
+	FTimerHandle Handle;
+	GetWorld()->GetTimerManager().SetTimer(Handle, this, &AProjectile::OnTimerExpire,DestroyDelay,false);
+
+	
+}
+void AProjectile::OnTimerExpire()
+{
+	Destroy();
+
+
+}
 // Called every frame
 
 

@@ -118,7 +118,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	
 	FVector TossVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	
+	//gives out the direction to hit an object from StartLocation to HitLocation with a speed of LaunchSpeed
 	bool bAimSolutionFound = UGameplayStatics::SuggestProjectileVelocity(
 		this, 
 		TossVelocity, 
@@ -129,6 +129,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 		0,
 		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace);
+
+	//if its not out of range
 	if (bAimSolutionFound)
 	{
 		auto TankName = GetOwner()->GetName();

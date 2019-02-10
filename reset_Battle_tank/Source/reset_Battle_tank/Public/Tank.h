@@ -18,6 +18,7 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
 
 	//UFUNCTION(BlueprintCallable, Category = Setup)
 	//void SetBarrelReference(UTankBarrel * BarrelToSet);
@@ -35,12 +36,13 @@ protected:
 
 
 
-private:	
-	
-	// Called every frame
+private:
+	UPROPERTY(EditDefaultsOnly)
+	int32 StartingHealth = 20;
+	UPROPERTY(VisibleAnywhere)
+	int32 CurrentHealth = StartingHealth;
 	
 
-	// Called to bind functionality to input
 	
 
 	

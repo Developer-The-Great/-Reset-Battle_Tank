@@ -34,12 +34,11 @@ void ATank_PlayerController::AimTowardsCrosshair()
 		//UE_LOG(LogTemp, Warning, TEXT("Aiming! End: %s"), *HitLocation.ToString());
 		TankAimingComponent->AimAt(HitLocation);
 	}
-	
-
 }
 
 bool ATank_PlayerController::GetSightRayHitLocation(FVector & HitLocation) const
 {
+	//Get the viewport size
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	//Find CrossHair Position
@@ -61,6 +60,7 @@ bool ATank_PlayerController::GetSightRayHitLocation(FVector & HitLocation) const
 bool ATank_PlayerController::GetLookDirection(FVector2D ScreenLoc, FVector & CamWorldDirection) const
 {
 	FVector CamWorldLocation;
+	//gets the 3D diretion of the dot on the screen 
 	return DeprojectScreenPositionToWorld(ScreenLoc.X, ScreenLoc.Y, CamWorldLocation, CamWorldDirection);
 	
 }
@@ -71,12 +71,15 @@ bool ATank_PlayerController::GetLookVectorHitLocation(FVector &HitLocation,FVect
 	FHitResult HitResult;
 	auto StartLoc = PlayerCameraManager->GetCameraLocation();
 	auto EndLoc = StartLoc + (CamWorldDirection * LineTraceRange);
+	//Does a ray-cast from the location of the tank towards the location + camera's facing direction times a certain range
 	bool bHitResultFound = GetWorld()->LineTraceSingleByChannel(
 		HitResult,
 		StartLoc,
 		EndLoc,
 		ECollisionChannel::ECC_Visibility
 	);
+
+	//if it hits something
 	if(bHitResultFound)
 	{
 		HitLocation = HitResult.Location;

@@ -7,7 +7,7 @@ UTankTrack::UTankTrack()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 	//
-
+	//OnComponentHit
 }
 
 void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)

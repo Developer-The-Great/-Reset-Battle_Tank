@@ -32,6 +32,8 @@ private:
 	UFUNCTION()
 	void OnHit( AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
 
+	void OnTimerExpire();
+
 	UProjectileMovementComponent * Projectile;
 
 	UPROPERTY(VisibleAnywhere)
@@ -44,5 +46,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	URadialForceComponent* RadialForce = nullptr;
+
+	UPROPERTY(EditDefaultsOnly)
+	float DestroyDelay = 10;
+	UPROPERTY(EditDefaultsOnly)
+	float ProjectileDamage = 10.f;
 	
 };
