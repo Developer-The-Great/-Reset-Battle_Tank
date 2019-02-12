@@ -26,30 +26,20 @@ public:
 	//UFUNCTION(BlueprintCallable, Category = Setup)
 	//void SetTurretReference(UTankTurret * TurretToSet);
 
-	
+	UFUNCTION(BlueprintPure, category = "Health")
+	float GetHealthPercent() const;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 
-
-
-
-
 private:
+
+
 	UPROPERTY(EditDefaultsOnly)
 	int32 StartingHealth = 20;
 	UPROPERTY(VisibleAnywhere)
 	int32 CurrentHealth = StartingHealth;
-	
 
-	
-
-	
-	
-	
-
-
-	
 
 };
