@@ -13,6 +13,8 @@ class RESET_BATTLE_TANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
+	FTankDelegate OnTankDeath;
 	// Sets default values for this pawn's properties
 	ATank();
 

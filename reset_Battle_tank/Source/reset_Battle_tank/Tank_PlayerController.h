@@ -33,7 +33,11 @@ public:
 	bool GetLookDirection(FVector2D ScreenLoc, FVector &CamWorldDirection) const;
 
 	bool GetLookVectorHitLocation(FVector &HitLocation, FVector CamWorldDirection) const;
+
+
 private:
+
+	void SetPawn(APawn * InPawn) override;
 	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5;
 	UPROPERTY(EditDefaultsOnly)
@@ -43,7 +47,8 @@ private:
 	
 	UTankAimingComponent * TankAimingComponent = nullptr;
 
-	
+	UFUNCTION()
+	void OnTankDeath();
 	
 	
 };

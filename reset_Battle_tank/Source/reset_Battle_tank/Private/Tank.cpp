@@ -15,7 +15,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 	UE_LOG(LogTemp, Warning, TEXT("DONKEY: %s Constructor cpp"), *GetName());
 	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-
+	
 	
 }
 
@@ -51,6 +51,7 @@ float ATank::TakeDamage(float Damage, FDamageEvent const & DamageEvent, AControl
 	CurrentHealth -= DamageToApply;
 
 	UE_LOG(LogTemp,Warning,TEXT("DamagePoints: %f,DamageToApply: %i"), Damage,DamageToApply)
+	OnTankDeath.Broadcast();
 	return DamageToApply;
 }
 

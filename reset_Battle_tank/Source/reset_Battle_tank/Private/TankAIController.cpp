@@ -3,7 +3,7 @@
 #include "TankAIController.h"
 #include "TankAimingComponent.h"
 #include "Engine/World.h"
-
+#include "Tank.h"
 #include "../Public/TankAIController.h"
 
 
@@ -41,6 +41,28 @@ void ATankAIController::Tick(float DeltaTime)
 
 	
 
+}
+
+void ATankAIController::OnTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("TANK DEATH"));
+}
+
+void ATankAIController::SetPawn(APawn * InPawn)
+{
+	Super::SetPawn(InPawn);
+	if(InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+
+		if(!ensure(PossessedTank))
+		{
+			return;
+		}
+
+		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+	
+	}
 }
 
 //void ATankAIController::AimAt(FVector HitLocation)
