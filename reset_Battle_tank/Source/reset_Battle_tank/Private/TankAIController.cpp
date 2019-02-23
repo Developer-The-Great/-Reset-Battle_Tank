@@ -19,33 +19,34 @@ void ATankAIController::Tick(float DeltaTime)
 {
 
 	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
-	auto AITank =GetPawn();
+	
 
 	auto TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(TankAimingComponent) || !ensure(PlayerTank))
 	{
+		UE_LOG(LogTemp,Warning,TEXT("AI_TankController ENSURE FAILED"))
 		return;
-	
 	}
-
+	//UE_LOG(LogTemp, Warning, TEXT("ai tank tick!"))
+	UE_LOG(LogTemp, Warning, TEXT("acceptance radius: %f"),AcceptanceRadius)
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
+
 	TankAimingComponent->AimAt(PlayerTank->GetActorLocation());
 	if(TankAimingComponent->GetFiringState() == EFiringStatus::Locked)
 	{
 		TankAimingComponent->Fire();
 	
 	}
-	
-	
-
-	
-
 }
 
 void ATankAIController::OnTankDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("TANK DEATH"));
+}
+
+void ATankAIController::DetachFromControllerPendingDestroy()
+{
 }
 
 void ATankAIController::SetPawn(APawn * InPawn)
@@ -61,7 +62,8 @@ void ATankAIController::SetPawn(APawn * InPawn)
 		}
 
 		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
-	
+		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankAIController::DetachFromControllerPendingDestroy);
+		
 	}
 }
 

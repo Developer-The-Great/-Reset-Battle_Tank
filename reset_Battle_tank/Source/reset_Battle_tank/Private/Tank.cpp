@@ -30,10 +30,8 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Warning, TEXT("DONKEY: %s BeginPLay cpp"), *GetName());
 	
-	
+	CurrentHealth = StartingHealth;
 }
-
-
 
 
 
@@ -51,7 +49,8 @@ float ATank::TakeDamage(float Damage, FDamageEvent const & DamageEvent, AControl
 	CurrentHealth -= DamageToApply;
 
 	UE_LOG(LogTemp,Warning,TEXT("DamagePoints: %f,DamageToApply: %i"), Damage,DamageToApply)
-	OnTankDeath.Broadcast();
+	if(CurrentHealth <= 0){ OnTankDeath.Broadcast(); }
+	
 	return DamageToApply;
 }
 

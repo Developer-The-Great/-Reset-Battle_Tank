@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-
 #include "Tank.generated.h"
 
 UCLASS()
@@ -13,6 +12,7 @@ class RESET_BATTLE_TANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
+
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
 	FTankDelegate OnTankDeath;
 	// Sets default values for this pawn's properties
@@ -37,11 +37,13 @@ protected:
 
 private:
 
-
+	
 	UPROPERTY(EditDefaultsOnly)
-	int32 StartingHealth = 20;
+	int32 StartingHealth;
 	UPROPERTY(VisibleAnywhere)
-	int32 CurrentHealth = StartingHealth;
+	int32 CurrentHealth;
+
+	
 
 
 };

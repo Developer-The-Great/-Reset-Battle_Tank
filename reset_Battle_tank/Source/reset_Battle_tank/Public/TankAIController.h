@@ -25,10 +25,13 @@ class RESET_BATTLE_TANK_API ATankAIController : public AAIController
 	void OnTankDeath();
 
 private:
+	UFUNCTION()
+	void DetachFromControllerPendingDestroy();
+
 	void SetPawn(APawn* InPawn) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	float AcceptanceRadius = 20000;
+	float AcceptanceRadius = 300;
 	
 	UTankAimingComponent * TankAimingComponent = nullptr;
 
