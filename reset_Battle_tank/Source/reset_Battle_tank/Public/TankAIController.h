@@ -31,7 +31,7 @@ private:
 	void SetPawn(APawn* InPawn) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	float AcceptanceRadius = 300;
+	float AcceptanceRadius = 1;
 	
 	UTankAimingComponent * TankAimingComponent = nullptr;
 
