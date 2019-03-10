@@ -20,6 +20,7 @@ void ATank_PlayerController::BeginPlay()
 
 void ATank_PlayerController::Tick(float DeltaTime)
 {
+	if (!GetPawn()) { return; }
 	AimTowardsCrosshair();
 }
 
@@ -92,10 +93,6 @@ bool ATank_PlayerController::GetLookVectorHitLocation(FVector &HitLocation,FVect
 	
 }
 
-void ATank_PlayerController::StartSpectatingOnly()
-{
-}
-
 void ATank_PlayerController::SetPawn(APawn * InPawn)
 {
 	Super::SetPawn(InPawn);
@@ -106,7 +103,7 @@ void ATank_PlayerController::SetPawn(APawn * InPawn)
 		if(!ensure(PossessedTank)) { return; }
 
 		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATank_PlayerController::OnTankDeath);
-		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATank_PlayerController::StartSpectatingOnly);
+		//PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATank_PlayerController::StartSpectatingOnly);
 	
 	}
 }
@@ -114,4 +111,5 @@ void ATank_PlayerController::SetPawn(APawn * InPawn)
 void ATank_PlayerController::OnTankDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("TANK DEATH"));
+	StartSpectatingOnly();
 }

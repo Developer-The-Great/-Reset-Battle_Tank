@@ -51,6 +51,10 @@ void AProjectile::BeginPlay()
 
 void AProjectile::OnHit( AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
+	
+	
+	
+	//UE_LOG(LogTemp, Warning, TEXT("HITNAME: %s"), *Name);
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	UE_LOG(LogTemp, Warning, TEXT("HIT"));

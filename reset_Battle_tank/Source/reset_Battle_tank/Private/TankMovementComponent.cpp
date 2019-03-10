@@ -56,12 +56,12 @@ void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, boo
 	auto IntendedDirection = MoveVelocity.GetSafeNormal();
 	auto TankDirection = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	float ThrowRequired = FVector::DotProduct(IntendedDirection, TankDirection);
-	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *GetOwner()->GetName(), *MoveVelocity.ToString())
+	//UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *GetOwner()->GetName(), *MoveVelocity.ToString())
 	IntendMoveForward(ThrowRequired);
 
 	FVector TurnThrow = FVector::CrossProduct(IntendedDirection,TankDirection);
 
-	UE_LOG(LogTemp, Warning, TEXT("DotProduct: %f, CrossProduct: %f"), ThrowRequired,TurnThrow.Z)
+	//UE_LOG(LogTemp, Warning, TEXT("DotProduct: %f, CrossProduct: %f"), ThrowRequired,TurnThrow.Z)
 
 	IntendTurn(TurnThrow.Z);
 }

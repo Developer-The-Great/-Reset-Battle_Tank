@@ -48,6 +48,13 @@ void UTankAimingComponent::Fire()
 	if(FiringStatus == EFiringStatus::Aiming || FiringStatus == EFiringStatus::Locked)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("Projectile")));
+		
+
+		
+		//UE_LOG(LogTemp, Warning, TEXT("%s"), *X.ToString());
+
+		
+
 		Amno--;
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
@@ -118,6 +125,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	
 	FVector TossVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+	
 	//gives out the direction to hit an object from StartLocation to HitLocation with a speed of LaunchSpeed
 	bool bAimSolutionFound = UGameplayStatics::SuggestProjectileVelocity(
 		this, 

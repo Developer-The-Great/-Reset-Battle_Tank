@@ -37,7 +37,7 @@ public:
 
 private:
 	UFUNCTION()
-	void StartSpectatingOnly();
+
 
 	void SetPawn(APawn * InPawn) override;
 	UPROPERTY(EditDefaultsOnly)
