@@ -28,7 +28,7 @@ void ATankAIController::Tick(float DeltaTime)
 		return;
 	}
 	//UE_LOG(LogTemp, Warning, TEXT("ai tank tick!"))
-	UE_LOG(LogTemp, Warning, TEXT("acceptance radius: %f"),AcceptanceRadius)
+	//UE_LOG(LogTemp, Warning, TEXT("acceptance radius: %f"),AcceptanceRadius)
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
 

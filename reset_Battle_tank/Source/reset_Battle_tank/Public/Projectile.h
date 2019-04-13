@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+//
 #pragma once
 
 #include "CoreMinimal.h"
@@ -51,5 +51,7 @@ private:
 	float DestroyDelay = 10;
 	UPROPERTY(EditDefaultsOnly)
 	float ProjectileDamage = 10.f;
+
+	
 	
 };
